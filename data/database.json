@@ -1,0 +1,112 @@
+{
+  "projects": [
+    {
+      "id": "proj_modular",
+      "title": "Projeto Modular Premium",
+      "category": "Residencial",
+      "description": "Módulos acoplados de alto padrão, combinando containers para uma residência de área expandida, design moderno e acabamento impecável.",
+      "badge": "Destaque",
+      "imageUrl": "",
+      "gallery": [],
+      "priceEstimate": 145000,
+      "dimensions": "60m² - 2 Módulos de 40 pés",
+      "rooms": "2 Quartos, 1 Suíte, Sala de Estar e Cozinha Integrada",
+      "deliveryTime": "60 dias",
+      "specs": [
+        "Isolamento térmoacústico especial em lã de rocha",
+        "Paredes internas com acabamento completo em Drywall pintado de branco",
+        "Portas externas de correr panorâmicas em vidro e alumínio preto",
+        "Instalações elétricas trifásicas prontas com tomadas e interruptores premium",
+        "Banheiro completo com box de vidro blindex, bacia sanitária e revestimento cerâmico"
+      ]
+    },
+    {
+      "id": "casa_comercial",
+      "title": "Casa / Escritório Comercial",
+      "category": "Comercial / Residencial",
+      "description": "Espaço híbrido ideal para moradia prática ou sede comercial com design contemporâneo e excelente iluminação natural.",
+      "badge": "Versátil",
+      "imageUrl": "",
+      "gallery": [],
+      "priceEstimate": 85000,
+      "dimensions": "30m² - 1 Módulo de 40 pés",
+      "rooms": "Layout Open Plan (Customizável) com 1 Banheiro Completo",
+      "deliveryTime": "45 dias",
+      "specs": [
+        "Isolamento térmico em Poliuretano (PU) expandido de alta densidade",
+        "Piso vinílico amadeirado de alta resistência (tráfego intenso)",
+        "Pintura externa em esmalte sintético automotivo naval cinza grafite",
+        "Luminárias embutidas de LED em sanca de gesso acústico",
+        "Pontos hidráulicos e elétricos sob medida para copa ou cozinha compacta"
+      ]
+    },
+    {
+      "id": "vitrine_atendimento",
+      "title": "Vitrine / Comercial High-Tech",
+      "category": "Comercial",
+      "description": "Espaço comercial ou showroom com fachada inteira de vidro temperado duplo, maximizando a visão dos seus produtos e o apelo visual.",
+      "badge": "Lançamento",
+      "imageUrl": "",
+      "gallery": [],
+      "priceEstimate": 68000,
+      "dimensions": "15m² - 1 Módulo de 20 pés",
+      "rooms": "Espaço Amplo de Atendimento com Lavabo Social",
+      "deliveryTime": "30 dias",
+      "specs": [
+        "Fachada frontal panorâmica em vidro temperado de 10mm com esquadrias pretas",
+        "Isolamento estrutural acústico reforçado",
+        "Piso cerâmico cinza marmorizado de fácil higienização",
+        "Deck frontal de 3 metros em madeira Pinus auto-clavada tratada",
+        "Espera para ar-condicionado Split de até 12.000 BTUs"
+      ]
+    },
+    {
+      "id": "modulo_40pes",
+      "title": "Módulo Lazer 40 Pés",
+      "category": "Residencial / Lazer",
+      "description": "Módulo perfeito para chácaras, praias ou lazer aos finais de semana, com deck suspenso acolhedor e acabamentos rústico-chiques.",
+      "badge": "Mais Vendido",
+      "imageUrl": "",
+      "gallery": [],
+      "priceEstimate": 115000,
+      "dimensions": "30m² - 1 Módulo de 40 pés",
+      "rooms": "Suíte Master Separada, Cozinha de Apoio e Sala Estar Integrada",
+      "deliveryTime": "50 dias",
+      "specs": [
+        "Isolamento térmoacústico completo com placas EPS e drywall anti-umidade",
+        "Piso vinílico de madeira carvalho clássico",
+        "Banheiro completo com revestimento cerâmico até o teto e chuveiro elétrico",
+        "Cozinha americana com bancada de granito São Gabriel preto",
+        "Janelas maxim-ar que favorecem a circulação cruzada do vento"
+      ]
+    }
+  ],
+  "leads": [],
+  "blogs": [
+    {
+      "id": "insulacao",
+      "title": "Isolamento Térmico em Containers: Qual o ideal para seu clima?",
+      "summary": "Descubra a diferença de desempenho entre lã de rocha, poliuretano injetado (PU) e placas EPS para manter sua casa fresca no verão e quente no inverno.",
+      "content": "Ao planejar sua casa container, o quesito mais crítico para o conforto é o **isolamento termoacústico**. Sem ele, a estrutura de aço atuará como um receptor térmico extremo.\n\n### Opções principais de Isolamento:\n1. **Lã de Rocha (Lã Mineral)**: Altamente recomendada por ter excelente desempenho térmico e, acima de tudo, o melhor isolamento contra barulhos. Também é totalmente incombustível (segurança total contra fogo).\n2. **Poliuretano Injetado (PU)**: Spray que se expande aderindo diretamente à chapa metálica. Fecha completamente qualquer fresta física contra ar e umidade. Perfeito para regiões de umidade alta ou beira de praia.\n3. **Poliestireno Expandido (EPS)**: Uma alternativa econômica e leve. Oferece boa proteção térmica geral se bem vedada na montagem.\n\nRecomendamos investir sempre em painéis Drywall para fechar a parede por dentro de forma totalmente lisa e pintável, gerando o visual de alvenaria tradicional.",
+      "category": "Construção",
+      "imageUrl": "",
+      "readTime": "5 min",
+      "date": "24 de Maio, 2026"
+    },
+    {
+      "id": "permissoes",
+      "title": "Como regularizar uma Casa Container na sua Prefeitura",
+      "summary": "Entenda o passo a passo legal: zoneamento, alvará de construção, projeto hidrossanitário e como conseguir aprovação sem dores de cabeça.",
+      "content": "Uma das maiores dúvidas de quem deseja construir com containers é: *\"Precisa de autorização da prefeitura?\"* \nA resposta curta é: **Sim, pois se trata de uma habitação fixa.**\n\n### Roteiro essencial para aprovação:\n- **Zoneamento local**: Verifique na Secretaria de Planejamento se o terreno permite construções do tipo.\n- **Projeto assinado**: É necessário contar com um Engenheiro ou Arquiteto para o desenho do projeto hidrossanitário, elétrico e memorial descritivo.\n- **Fundação adequada**: Embora mais leve, a estrutura necessita de pilares ou sapatas de concreto.\n- **Habite-se**: Ao final da montagem, a vistoria municipal audita as ligações de luz e fossa/esgoto para conceder o documento final.\n\nFabricar com uma empresa parceira como a **Delivery Container** facilita muito, pois fornecemos cadernos técnicos e plantas prontas para o seu engenheiro dar entrada com agilidade.",
+      "category": "Legislação",
+      "imageUrl": "",
+      "readTime": "4 min",
+      "date": "12 de Maio, 2026"
+    }
+  ],
+  "settings": {
+    "resendApiKey": "",
+    "notifiedEmail": "lorem.ipsum@placeholder.com",
+    "senderEmail": "lorem.ipsum@placeholder.com"
+  }
+}

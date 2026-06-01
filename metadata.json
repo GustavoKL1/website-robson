@@ -1,0 +1,6 @@
+{
+  "name": "Delivery Container",
+  "description": "Casas container sob medida com acabamento completo. Modelos, orçamentos personalizados e painel de controle.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
