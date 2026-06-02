@@ -17,7 +17,6 @@ import {
   setSessionCookie,
   createSessionToken,
   verifyPassword,
-  verifyTotp,
 } from "./server/auth";
 import { escapeHtml, securityHeaders } from "./server/security";
 
@@ -65,10 +64,7 @@ const initialProjects = [
     description: "Módulos acoplados de alto padrão, combinando containers para uma residência de área expandida, design moderno e acabamento impecável.",
     badge: "Destaque",
     imageUrl: "",
-    gallery: [
-      "",
-      ""
-    ],
+    gallery: ["", ""],
     priceEstimate: 145000,
     dimensions: "60m² - 2 Módulos de 40 pés",
     rooms: "2 Quartos, 1 Suíte, Sala de Estar e Cozinha Integrada",
@@ -88,9 +84,7 @@ const initialProjects = [
     description: "Espaço híbrido ideal para moradia prática ou sede comercial com design contemporâneo e excelente iluminação natural.",
     badge: "Versátil",
     imageUrl: "",
-    gallery: [
-      ""
-    ],
+    gallery: [""],
     priceEstimate: 85000,
     dimensions: "30m² - 1 Módulo de 40 pés",
     rooms: "Layout Open Plan (Customizável) com 1 Banheiro Completo",
@@ -110,9 +104,7 @@ const initialProjects = [
     description: "Espaço comercial ou showroom com fachada inteira de vidro temperado duplo, maximizando a visão dos seus produtos e o apelo visual.",
     badge: "Lançamento",
     imageUrl: "",
-    gallery: [
-      ""
-    ],
+    gallery: [""],
     priceEstimate: 68000,
     dimensions: "15m² - 1 Módulo de 20 pés",
     rooms: "Espaço Amplo de Atendimento com Lavabo Social",
@@ -132,9 +124,7 @@ const initialProjects = [
     description: "Módulo perfeito para chácaras, praias ou lazer aos finais de semana, com deck suspenso acolhedor e acabamentos rústico-chiques.",
     badge: "Mais Vendido",
     imageUrl: "",
-    gallery: [
-      ""
-    ],
+    gallery: [""],
     priceEstimate: 115000,
     dimensions: "30m² - 1 Módulo de 40 pés",
     rooms: "Suíte Master Separada, Cozinha de Apoio e Sala Estar Integrada",
@@ -225,7 +215,7 @@ function writeDB(data: any) {
   fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
 }
 
-// --- Admin authentication (server-side session + optional TOTP) ---
+// --- Admin authentication (server-side session) ---
 
 app.get("/api/admin/me", (req, res) => {
   const config = getAdminConfig();
@@ -238,7 +228,6 @@ app.get("/api/admin/me", (req, res) => {
     res.json({
       authenticated: false,
       configured: true,
-      totpRequired: Boolean(config.totpSecret),
     });
     return;
   }
@@ -246,7 +235,6 @@ app.get("/api/admin/me", (req, res) => {
     authenticated: true,
     configured: true,
     username: session.sub,
-    totpRequired: Boolean(config.totpSecret),
   });
 });
 
@@ -268,7 +256,7 @@ app.post("/api/admin/login", async (req, res) => {
     return;
   }
 
-  const { username, password, totp } = req.body ?? {};
+  const { username, password } = req.body ?? {};
 
   if (
     typeof username !== "string" ||
@@ -281,24 +269,12 @@ app.post("/api/admin/login", async (req, res) => {
     return;
   }
 
-  if (config.totpSecret) {
-    if (typeof totp !== "string" || !verifyTotp(totp, config.totpSecret)) {
-      recordFailedLogin(req);
-      res.status(401).json({
-        error: "Código de autenticação (2FA) inválido ou ausente.",
-        totpRequired: true,
-      });
-      return;
-    }
-  }
-
   clearLoginAttempts(req);
   const token = createSessionToken(config.username, config.sessionSecret);
   setSessionCookie(res, token, config);
   res.json({
     success: true,
     username: config.username,
-    totpRequired: Boolean(config.totpSecret),
   });
 });
 
@@ -398,7 +374,6 @@ app.post("/api/leads", async (req, res) => {
       const resend = new Resend(apiKey);
       console.log(`Sending budget lead email. Sender: ${senderEmail}, Notified: ${notifiedEmail}`);
 
-      // HTML client layout
       const budgetText = targetBudget ? `R$ ${Number(targetBudget).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : "Não informado";
       const htmlBody = `
         <div style="font-family: sans-serif; color: #1a1d1f; max-width: 600px; margin: 0 auto; border: 1px solid #eaeaea; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
@@ -521,7 +496,6 @@ app.post("/api/blogs", requireAdmin, (req, res) => {
 app.get("/api/settings", requireAdmin, (req, res) => {
   const db = readDB();
   const sett = db.settings || initialSettings;
-  // Return masked value for API safety
   res.json({
     resendApiKey: sett.resendApiKey ? "•••••••••••••" + sett.resendApiKey.slice(-4) : "",
     notifiedEmail: sett.notifiedEmail,
@@ -534,7 +508,6 @@ app.post("/api/settings", requireAdmin, (req, res) => {
   const current = db.settings || initialSettings;
   const { resendApiKey, notifiedEmail, senderEmail } = req.body;
 
-  // Only override api key if user actually typed a non-masked value
   let finalKey = current.resendApiKey;
   if (resendApiKey && !resendApiKey.includes("••••••••")) {
     finalKey = resendApiKey;
@@ -642,7 +615,6 @@ Seja sempre prestativo e, caso as dúvidas evoluão para intenção de compra, o
     res.status(500).json({ error: err.message || "Erro no processamento de inteligência artificial" });
   }
 });
-
 
 // Start Server helper + Vite setup
 async function startServer() {

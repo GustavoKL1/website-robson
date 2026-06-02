@@ -1,7 +1,6 @@
 import { createHmac, randomBytes, scrypt, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
 import type { Request, Response, NextFunction } from "express";
-import { verifySync, generateSecret, generateURI } from "otplib";
 
 const scryptAsync = promisify(scrypt);
 
@@ -15,18 +14,27 @@ export interface AdminConfig {
   username: string;
   passwordHash: string;
   sessionSecret: string;
-  totpSecret: string | null;
   secureCookies: boolean;
 }
 
 export function getAdminConfig(): AdminConfig | null {
   const sessionSecret = process.env.ADMIN_SESSION_SECRET?.trim();
   const username = process.env.ADMIN_USERNAME?.trim() || "admin";
+  const isProduction = process.env.NODE_ENV === "production";
 
   let passwordHash = process.env.ADMIN_PASSWORD_HASH?.trim() || "";
   const plainPassword = process.env.ADMIN_PASSWORD?.trim();
 
+  // Production Readiness: Enforce hashed passwords in production environments
   if (!passwordHash && plainPassword) {
+    if (isProduction) {
+      console.error(
+        "[security] CRITICAL: Plain-text ADMIN_PASSWORD is completely disabled in production mode. " +
+          "You must generate a secure hash using scripts/hash-admin-password.mjs and set ADMIN_PASSWORD_HASH."
+      );
+      return null;
+    }
+
     console.warn(
       "[security] ADMIN_PASSWORD is set without ADMIN_PASSWORD_HASH. " +
         "Run: node scripts/hash-admin-password.mjs \"your-password\" and set ADMIN_PASSWORD_HASH instead."
@@ -38,14 +46,11 @@ export function getAdminConfig(): AdminConfig | null {
     return null;
   }
 
-  const totpSecret = process.env.ADMIN_TOTP_SECRET?.trim().replace(/\s/g, "") || null;
-
   return {
     username,
     passwordHash,
     sessionSecret,
-    totpSecret,
-    secureCookies: process.env.NODE_ENV === "production",
+    secureCookies: isProduction,
   };
 }
 
@@ -74,17 +79,6 @@ export async function verifyPassword(
 
   if (expected.length !== derived.length) return false;
   return timingSafeEqual(derived, expected);
-}
-
-export function verifyTotp(code: string, secret: string): boolean {
-  const normalized = code.replace(/\s/g, "");
-  if (!/^\d{6}$/.test(normalized)) return false;
-  const result = verifySync({
-    secret,
-    token: normalized,
-    epochTolerance: 1,
-  });
-  return result.valid === true;
 }
 
 export function createSessionToken(
