@@ -1167,24 +1167,186 @@ const nextProject = useCallback(() => {
                     ))}
                   </div>
                   <div className="flex-1 p-6 overflow-y-auto">
+                    {/* 1. LEADS TAB */}
+                    {adminTab === 'leads' && (
+                      <div className="space-y-6 animate-fadeIn">
+                        <h5 className="font-black text-lg border-b border-zinc-800 pb-2 text-white">Gerenciamento de Leads</h5>
+                        {adminLeads.length === 0 ? (
+                          <p className="text-zinc-500 text-sm">Nenhum rascunho ou lead recebido ainda.</p>
+                        ) : (
+                          <div className="overflow-x-auto rounded-xl border border-zinc-800">
+                            <table className="w-full text-sm text-left text-zinc-400">
+                              <thead className="text-xs uppercase bg-zinc-900 text-zinc-300 border-b border-zinc-800">
+                                <tr>
+                                  <th className="px-4 py-3">Cliente</th>
+                                  <th className="px-4 py-3">Contato</th>
+                                  <th className="px-4 py-3">Interesse Estimado</th>
+                                  <th className="px-4 py-3">Status</th>
+                                  <th className="px-4 py-3 text-center">Remover</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {adminLeads.map((lead) => (
+                                  <tr key={lead.id} className="border-b border-zinc-850 bg-zinc-950/40 hover:bg-zinc-900/40 transition-colors">
+                                    <td className="px-4 py-3 font-bold text-white">{lead.name}</td>
+                                    <td className="px-4 py-3">
+                                      <div className="text-zinc-300">{lead.email}</div>
+                                      <div className="text-xs text-zinc-500">{lead.phone}</div>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                      <div className="text-zinc-300 font-medium">{lead.projectInterest || "Não especificado"}</div>
+                                      <div className="text-xs text-emerald-500 font-semibold">
+                                        Orçamento: {lead.targetBudget ? `R$ ${lead.targetBudget.toLocaleString('pt-BR')}` : "Sob Consulta"}
+                                      </div>
+                                    </td>
+                                    <td className="px-4 py-3">
+                                      <select 
+                                        value={lead.status} 
+                                        onChange={(e) => handleUpdateLeadStatus(lead.id, e.target.value as any)}
+                                        className="bg-zinc-900 border border-zinc-700 text-zinc-200 rounded-lg px-2.5 py-1 text-xs outline-none focus:border-red-500"
+                                      >
+                                        <option value="new">Novo Lead</option>
+                                        <option value="contacted">Em Contato</option>
+                                        <option value="qualified">Qualificado</option>
+                                        <option value="lost">Perdido / Arquivado</option>
+                                      </select>
+                                    </td>
+                                    <td className="px-4 py-3 text-center">
+                                      <button 
+                                        onClick={() => handleDeleteLead(lead.id)} 
+                                        className="text-zinc-500 hover:text-red-400 p-1 rounded-md transition-colors"
+                                        title="Excluir Lead"
+                                      >
+                                        <Trash2 size={16} />
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* 2. PROJECTS TAB */}
+                    {adminTab === 'projects' && (
+                      <div className="space-y-6 animate-fadeIn">
+                        <h5 className="font-black text-lg border-b border-zinc-800 pb-2 text-white">Adicionar Novo Modelo ao Catálogo</h5>
+                        <form onSubmit={handleCreateProject} className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-zinc-900/40 p-5 rounded-2xl border border-zinc-800">
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Título do Modelo</label>
+                            <input type="text" required value={newProjectForm.title || ""} onChange={(e) => setNewProjectForm({...newProjectForm, title: e.target.value})} placeholder="Ex: Container Suíte Master Luxury" className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Categoria</label>
+                            <input type="text" value={newProjectForm.category || ""} onChange={(e) => setNewProjectForm({...newProjectForm, category: e.target.value})} placeholder="Residencial, Comercial, etc." className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Tag de Destaque (Badge)</label>
+                            <input type="text" value={newProjectForm.badge || ""} onChange={(e) => setNewProjectForm({...newProjectForm, badge: e.target.value})} placeholder="Ex: Lançamento, Mais Vendido" className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Preço Estimado (R$)</label>
+                            <input type="number" value={newProjectForm.priceEstimate || ""} onChange={(e) => setNewProjectForm({...newProjectForm, priceEstimate: Number(e.target.value)})} placeholder="95000" className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="sm:col-span-2 flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Descrição Detalhada</label>
+                            <textarea value={newProjectForm.description || ""} onChange={(e) => setNewProjectForm({...newProjectForm, description: e.target.value})} placeholder="Insira os detalhes e diferenciais estruturais..." className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600 h-24 resize-none" />
+                          </div>
+                          <button type="submit" className="sm:col-span-2 py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl text-sm shadow-md cursor-pointer transition-all active:scale-98">
+                            Adicionar Modelo ao Catálogo Live
+                          </button>
+                        </form>
+
+                        <h5 className="font-black text-base mt-8 text-white">Modelos Ativos no Portfólio ({projects.length})</h5>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          {projects.map(p => (
+                            <div key={p.id} className="bg-zinc-900/30 p-4 rounded-xl border border-zinc-850 flex justify-between items-center hover:border-zinc-700 transition-colors">
+                              <div className="text-left">
+                                <div className="font-bold text-white text-sm">{p.title}</div>
+                                <div className="text-xs text-zinc-500 mt-0.5">{p.category || "Geral"} — R$ {p.priceEstimate?.toLocaleString('pt-BR')}</div>
+                              </div>
+                              <button onClick={() => handleDeleteProject(p.id)} className="text-zinc-500 hover:text-red-400 p-1.5 transition-colors cursor-pointer">
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 3. BLOGS TAB */}
+                    {adminTab === 'blogs' && (
+                      <div className="space-y-6 animate-fadeIn">
+                        <h5 className="font-black text-lg border-b border-zinc-800 pb-2 text-white">Publicar Novo Artigo de Engenharia</h5>
+                        <form onSubmit={handleCreateBlog} className="flex flex-col space-y-4 bg-zinc-900/40 p-5 rounded-2xl border border-zinc-800">
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Título da Postagem</label>
+                            <input type="text" required value={newBlogForm.title || ""} onChange={(e) => setNewBlogForm({...newBlogForm, title: e.target.value})} placeholder="Ex: Como funciona a fundação por sapatas isoladas para containers" className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Resumo Rápido (Card)</label>
+                            <input type="text" value={newBlogForm.summary || ""} onChange={(e) => setNewBlogForm({...newBlogForm, summary: e.target.value})} placeholder="Uma breve introdução atraente para a listagem..." className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Conteúdo Integral</label>
+                            <textarea required value={newBlogForm.content || ""} onChange={(e) => setNewBlogForm({...newBlogForm, content: e.target.value})} placeholder="Escreva o artigo técnico aqui..." className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600 h-48 resize-none" />
+                          </div>
+                          <button type="submit" className="py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl text-sm cursor-pointer transition-all active:scale-98">
+                            Publicar Artigo Instantaneamente
+                          </button>
+                        </form>
+                      </div>
+                    )}
+
+                    {/* 4. SETTINGS TAB */}
+                    {adminTab === 'settings' && (
+                      <div className="space-y-6 animate-fadeIn">
+                        <h5 className="font-black text-lg border-b border-zinc-800 pb-2 text-white">Integrações de Disparos de E-mail</h5>
+                        <form onSubmit={handleSaveSettings} className="flex flex-col space-y-5 bg-zinc-900/40 p-5 rounded-2xl border border-zinc-800">
+                          <div className="flex flex-col space-y-1">
+                            <div className="flex items-center justify-between">
+                              <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">Resend API Key</label>
+                              <span className="text-[10px] bg-zinc-800 px-2 py-0.5 rounded text-zinc-500 font-mono">re_***</span>
+                            </div>
+                            <input type="password" value={settings.resendApiKey || ""} onChange={(e) => setSettings({...settings, resendApiKey: e.target.value})} placeholder="Insira sua credencial secreta do Resend" className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600 font-mono text-zinc-300" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">E-mail de Destino (Onde você recebe os alertas)</label>
+                            <input type="email" value={settings.notifiedEmail || ""} onChange={(e) => setSettings({...settings, notifiedEmail: e.target.value})} className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <div className="flex flex-col space-y-1">
+                            <label className="text-[11px] text-zinc-400 font-bold uppercase tracking-wider">E-mail Remetente Autenticado (Domínio próprio)</label>
+                            <input type="email" value={settings.senderEmail || ""} onChange={(e) => setSettings({...settings, senderEmail: e.target.value})} className="px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-sm text-white outline-none focus:border-red-600" />
+                          </div>
+                          <button type="submit" className="py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-xl text-sm cursor-pointer transition-all active:scale-98">
+                            Salvar Configurações de Gateway
+                          </button>
+                        </form>
+                      </div>
+                    )}
+
+                    {/* 5. PERFORMANCE TAB */}
                     {adminTab === 'performance' && (
-                      <div className="space-y-6">
+                      <div className="space-y-6 animate-fadeIn">
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                          <div className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-850">
-                            <span className="text-[10px] uppercase text-zinc-400">Tempo do Último Commit</span>
+                          <div className="bg-zinc-900/50 p-4 rounded-xl border border-zinc-800 text-left">
+                            <span className="text-[10px] uppercase text-zinc-400 font-bold tracking-wider">Tempo do Último Commit</span>
                             <span className="text-2xl font-black text-emerald-400 block mt-1">{perfMetricsRef.current.lastDuration ? `${perfMetricsRef.current.lastDuration.toFixed(2)} ms` : "0.32 ms"}</span>
                           </div>
                         </div>
-                        <div className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-850 space-y-4">
-                          <h5 className="font-bold text-sm">Executar Teste de Estresse do Simulador</h5>
-                          <button type="button" disabled={isBenchmarking} onClick={runBenchmarkSuite} className="px-5 py-2.5 bg-red-600 text-white font-extrabold rounded-lg text-xs">
+                        <div className="bg-zinc-900/50 p-6 rounded-2xl border border-zinc-850 space-y-4 text-left">
+                          <h5 className="font-bold text-sm text-white">Executar Teste de Estresse do Simulador</h5>
+                          <p className="text-xs text-zinc-400 leading-relaxed">Gera 50 ciclos sequenciais de re-renderização reativa forçada usando animações parciais no DOM virtual para medir taxas de bloqueio da thread do V8.</p>
+                          <button type="button" disabled={isBenchmarking} onClick={runBenchmarkSuite} className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-lg text-xs transition-colors cursor-pointer disabled:opacity-50">
                             {isBenchmarking ? `Calculando Benchmarks (${benchmarkTick}/50)...` : "Iniciar Teste De Estresse Real"}
                           </button>
                           {benchmarkResult && (
-                            <div className="mt-4 p-4 bg-zinc-950 rounded-xl space-y-2">
+                            <div className="mt-4 p-4 bg-zinc-950 rounded-xl space-y-2 border border-zinc-800 animate-fadeIn">
                               <span className="text-xs text-zinc-400 font-bold block">RESULTADO:</span>
                               <div className="text-sm font-black text-emerald-400">{benchmarkResult.score}</div>
-                              <div className="text-xs text-zinc-500">Média por render: {benchmarkResult.avgTime.toFixed(3)} ms</div>
+                              <div className="text-xs text-zinc-500">Média por render da árvore reativa: {benchmarkResult.avgTime.toFixed(3)} ms</div>
                             </div>
                           )}
                         </div>
