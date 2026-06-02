@@ -18,7 +18,7 @@ const PlaceholderImage = React.memo(function PlaceholderImage({
   const getUnsplashUrl = (term: string) => {
     const lower = term.toLowerCase();
     if (lower.includes("hero")) {
-      return "https://images.unsplash.com/photo-1590086782792-42dd2350140d?auto=format&fit=crop&w=1200&q=80"; // Premium Container House Exterior
+      return "https://images.unsplash.com/photo-1693515185000-ee4c3786ecea?q=80&w=1042&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"; // Premium Container House Exterior
     }
     if (lower.includes("juliana") || lower.includes("amanda")) {
       return "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"; // Female Client Avatar
@@ -27,13 +27,13 @@ const PlaceholderImage = React.memo(function PlaceholderImage({
       return "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"; // Male Client Avatar
     }
     if (lower.includes("duplex") || lower.includes("chácara")) {
-      return "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"; // Luxury Modular Architecture
+      return "https://images.unsplash.com/photo-1631215320889-7cf5eb3224f8?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbnRhaW5lciUyMGhvdXNlfGVufDB8fDB8fHww"; // Luxury Modular Architecture
     }
     if (lower.includes("industrial") || lower.includes("escritório")) {
-      return "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"; // Modern Workspace / Office Container
+      return "https://images.unsplash.com/photo-1745566589290-d678de04f990?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y29udGFpbmVyJTIwaG91c2V8ZW58MHx8MHx8fDA%3D"; // Modern Workspace / Office Container
     }
     if (lower.includes("artigo") || lower.includes("blog") || lower.includes("construção")) {
-      return "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80"; // Engineering / Technical Blog Cover
+      return "https://www.thespruce.com/thmb/TaDe5BVo822vf69V2Qfl3QuG3FA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/yaryna-bakhovska-gVa3uv7dJoA-unsplash-543bc738774c4f3bbcc451997aa4f1bd.jpg"; // Engineering / Technical Blog Cover
     }
     // General high-end container living fallback
     return "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=80";
