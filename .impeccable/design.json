@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-02",
+  "title": "Design System: Chilante Container",
+  "extensions": {
+    "colorMeta": {
+      "page-bg": { "role": "background", "displayName": "Page Background", "canonical": "#18181b", "tonalRamp": ["#0a0a0c", "#0f0f12", "#141417", "#18181b", "#2a2a2e", "#3d3d41", "#505054", "#636367"] },
+      "surface": { "role": "surface", "displayName": "Surface", "canonical": "#000000", "tonalRamp": ["#000000", "#000000", "#0d0d0d", "#1a1a1a", "#262626", "#333333", "#404040", "#4d4d4d"] },
+      "text-primary": { "role": "text", "displayName": "Text Primary", "canonical": "#ffffff", "tonalRamp": ["#ffffff", "#e6e6e6", "#cccccc", "#b3b3b3", "#999999", "#808080", "#666666", "#4d4d4d"] },
+      "text-muted": { "role": "text", "displayName": "Text Muted", "canonical": "#404040", "tonalRamp": ["#0d0d0d", "#1a1a1a", "#262626", "#333333", "#404040", "#4d4d4d", "#595959", "#666666"] },
+      "accent": { "role": "accent", "displayName": "Accent Blue", "canonical": "#0000ee", "tonalRamp": ["#000066", "#000099", "#0000bb", "#0000dd", "#0000ee", "#1a1aff", "#4040ff", "#6666ff"] },
+      "border": { "role": "border", "displayName": "Border", "canonical": "#5d5d5d", "tonalRamp": ["#1a1a1a", "#262626", "#333333", "#404040", "#4d4d4d", "#5d5d5d", "#6e6e6e", "#7f7f7f"] },
+      "success": { "role": "success", "displayName": "Success Green", "canonical": "#27c919", "tonalRamp": ["#0a4d06", "#10730a", "#17990e", "#1ebf14", "#27c919", "#40d433", "#59de4d", "#73e866"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and major section headings only." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs, descriptions, all running text." },
+      "label": { "displayName": "Label", "purpose": "Button text, badges, section eyebrows, form labels." }
+    },
+    "shadows": [
+      { "name": "interactive", "value": "rgb(132, 129, 129) 0px 2px 4px 0px", "purpose": "Hover/focus state on buttons and floating elements." },
+      { "name": "overlay", "value": "10px 10px 25px rgb(0 0 0/10%)", "purpose": "Modal and dialog surfaces." }
+    ],
+    "motion": [
+      { "name": "ease-interaction", "value": "opacity 0.15s ease", "purpose": "Button hover transitions." },
+      { "name": "ease-nav", "value": "color 0.3s ease", "purpose": "Navigation link hover/active transitions." },
+      { "name": "ease-faq", "value": "transform 0.3s ease", "purpose": "FAQ accordion chevron rotation." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "576px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "992px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary call-to-action. Used for quote requests, form submissions, and key navigation.",
+      "html": "<button class=\"ds-btn-primary\">SOLICITAR OR\u00c7AMENTO</button>",
+      "css": ".ds-btn-primary { background: #0000ee; color: #ffffff; padding: 10px 20px; border-radius: 10px; border: none; font-family: Poppins, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: opacity 0.15s ease; } .ds-btn-primary:hover { opacity: 0.9; } .ds-btn-primary:focus-visible { outline: 2px solid #0000ee; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action. Used for secondary CTAs like 'View Catalog'.",
+      "html": "<button class=\"ds-btn-ghost\">VER CAT\u00c1LOGO</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #ffffff; padding: 10px 20px; border-radius: 10px; border: 1px solid #5d5d5d; font-family: Poppins, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; } .ds-btn-ghost:hover { opacity: 0.9; } .ds-btn-ghost:focus-visible { outline: 2px solid #0000ee; outline-offset: 2px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Product catalog card and testimonial card.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-badge\">20 P\u00c9S // ALMOXARIFADO</div><h3 class=\"ds-card-title\">Container Almoxarifado Standard</h3><p class=\"ds-card-desc\">Ideal para armazenamento seguro de ferramentas e insumos industriais.</p></div>",
+      "css": ".ds-card { background: #000000; border: 1px solid #5d5d5d; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 10px; } .ds-card-badge { display: inline-block; background: #18181b; color: #404040; padding: 5px 10px; border-radius: 5px; font-family: Poppins, sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; } .ds-card-title { font-family: Track, sans-serif; font-size: 20px; font-weight: 700; color: #ffffff; margin: 0; line-height: 1.2; } .ds-card-desc { font-family: Poppins, sans-serif; font-size: 14px; color: #404040; line-height: 1.5; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form text input and select fields.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Digite aqui...\" />",
+      "css": ".ds-input { width: 100%; background: #18181b; border: 1px solid #5d5d5d; border-radius: 10px; padding: 10px 15px; color: #ffffff; font-family: Poppins, sans-serif; font-size: 14px; outline: none; box-sizing: border-box; } .ds-input:focus { border-color: #0000ee; } .ds-input::placeholder { color: #404040; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky top navigation with links and CTA.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Modelos</a><a class=\"ds-nav-link\" href=\"#\">Simular</a><a class=\"ds-nav-link\" href=\"#\">FAQ</a><button class=\"ds-btn-primary\" style=\"margin-left:auto\">SOLICITAR OR\u00c7AMENTO</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 15px; background: #000000; border-bottom: 1px solid #5d5d5d; padding: 15px 20px; position: sticky; top: 0; z-index: 40; } .ds-nav-link { color: #404040; padding: 10px 15px; border-radius: 10px; text-decoration: none; font-family: Poppins, sans-serif; font-size: 12px; font-weight: 400; transition: color 0.3s ease; } .ds-nav-link:hover { color: #ffffff; } .ds-nav-link-active { color: #0000ee; font-weight: 700; }"
+    },
+    {
+      "name": "FAQ Accordion",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Expandable FAQ question/answer pair.",
+      "html": "<div class=\"ds-faq\"><button class=\"ds-faq-q\">Quanto tempo leva a fabrica\u00e7\u00e3o? <span class=\"ds-faq-chevron\">\u25bc</span></button><div class=\"ds-faq-a\">O prazo m\u00e9dio de fabrica\u00e7\u00e3o \u00e9 de 15 a 25 dias \u00fateis.</div></div>",
+      "css": ".ds-faq { background: #000000; border: 1px solid #5d5d5d; border-radius: 10px; overflow: hidden; } .ds-faq-q { width: 100%; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; color: #ffffff; font-family: Poppins, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-align: left; } .ds-faq-chevron { color: #404040; transition: transform 0.3s ease; } .ds-faq-a { padding: 0 20px 15px; color: #404040; font-family: Poppins, sans-serif; font-size: 14px; line-height: 1.5; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Industrial Workshop",
+    "overview": "A dark, robust, mechanical interface that communicates strength and reliability through honest materials and deliberate restraint. The palette is predominantly monochromatic with a single blue accent for interactivity. This is not a polished corporate site; it is a factory floor rendered in pixels.",
+    "keyCharacteristics": [
+      "Dark theme throughout; no light mode",
+      "Monochromatic with a single high-saturation blue accent",
+      "Industrial, utilitarian sans-serif typography",
+      "Visible borders and defined surface separation",
+      "Expressive but purposeful motion",
+      "No glass, no blur, no gradient text, no decorative shadows"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "The blue accent is used on \u226410% of any given screen. Its rarity communicates importance. A blue element that is not interactive is a design failure.", "section": "colors" },
+      { "name": "The Two-Family Rule", "body": "Track and Poppins are the only fonts permitted. No third family enters the system.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Shadows appear only as a response to state (hover, elevation, focus) or for floating/overlay elements.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use #0000ee for interactive elements only",
+      "Do use #18181b as bg and #000000 for surfaces",
+      "Do keep the accent rare - \u226410% of any screen",
+      "Do use Track for headings, Poppins for body",
+      "Do follow the 5px spacing grid",
+      "Do use borders to separate sections",
+      "Do use tonal layering over shadows for depth",
+      "Do respect prefers-reduced-motion",
+      "Do provide visible focus indicators"
+    ],
+    "donts": [
+      "Don't introduce colors outside the palette",
+      "Don't use blue accent decoratively",
+      "Don't use backdrop-blur or glassmorphism",
+      "Don't use drop shadows on cards at rest",
+      "Don't introduce additional font families",
+      "Don't use arbitrary spacing values",
+      "Don't make generic SaaS template designs",
+      "Don't use gradient text or border-left stripes",
+      "Don't ship uppercase body copy"
+    ]
+  }
+}

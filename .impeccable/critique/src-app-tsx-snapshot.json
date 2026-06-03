@@ -1,0 +1,24 @@
+{
+  "target": "src/App.tsx",
+  "slug": "src-app-tsx",
+  "critique_id": "req_2c1d82f1-49a3-4f88-acc8-65c301a2f83b",
+  "session": "ses_175a2de7dffeIcSIY2qW2gBRis",
+  "timestamp": "2026-06-02",
+  "detector_findings": [
+    {
+      "id": "side-tab_f0da",
+      "rule": "side-tab",
+      "file": "src/App.tsx",
+      "line": 174,
+      "severity": "warning",
+      "code": "borderLeft: \"4px solid #0000ee\"",
+      "message": "Side-tab accent stripe on section heading — recognizable tell of AI-generated UI"
+    }
+  ],
+  "heuristic_score": 19,
+  "scored_by": "Design Director Assessment",
+  "p0_count": 2,
+  "p1_count": 2,
+  "p2_count": 2,
+  "p3_count": 1
+}

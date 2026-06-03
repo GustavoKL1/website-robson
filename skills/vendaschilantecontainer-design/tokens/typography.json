@@ -1,0 +1,88 @@
+{
+  "families": [
+    "Track",
+    "Poppins"
+  ],
+  "scale": {
+    "heading-1": {
+      "fontFamily": "Track",
+      "fontSize": "64px",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "heading-2": {
+      "fontFamily": "Track",
+      "fontSize": "50px",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "heading-3": {
+      "fontFamily": "Track",
+      "fontSize": "40px",
+      "fontWeight": "700",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "body": {
+      "fontFamily": "Poppins",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": null,
+      "source": "css"
+    },
+    "caption": {
+      "fontFamily": "Poppins",
+      "fontSize": "20px",
+      "fontWeight": "400",
+      "lineHeight": null,
+      "source": "css"
+    }
+  },
+  "fontFaces": [
+    {
+      "family": "Poppins",
+      "src": "https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrFJA.ttf",
+      "format": "truetype",
+      "weight": "400"
+    },
+    {
+      "family": "Poppins",
+      "src": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6V1s.ttf",
+      "format": "truetype",
+      "weight": "600"
+    },
+    {
+      "family": "Poppins",
+      "src": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7V1s.ttf",
+      "format": "truetype",
+      "weight": "700"
+    },
+    {
+      "family": "Poppins",
+      "src": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4V1s.ttf",
+      "format": "truetype",
+      "weight": "800"
+    },
+    {
+      "family": "Track",
+      "src": "https://www.interago.com.br/App/Sites/386/mc/Fontes/Track/Track.woff2",
+      "format": "woff2",
+      "weight": "400"
+    },
+    {
+      "family": "Track",
+      "src": "https://www.interago.com.br/App/Sites/386/mc/Fontes/Track/Track.woff",
+      "format": "woff2",
+      "weight": "400"
+    }
+  ],
+  "rules": {
+    "maxSizesPerScreen": 4,
+    "headingWeightRange": "600-700",
+    "bodyWeight": 400,
+    "lineHeightBody": 1.5,
+    "lineHeightHeading": 1.2
+  }
+}
